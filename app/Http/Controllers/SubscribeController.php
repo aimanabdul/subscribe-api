@@ -24,12 +24,14 @@ class SubscribeController extends Controller
         // validate the request data
         $request->validate([
             'email' => 'required|email|unique:subscribers,email',
-            'name' => 'nullable|string|max:255',
+            'first_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
         ]);
 
         $subscriber = new \App\Models\Subscriber();
         $subscriber->email = $request->email;
-        $subscriber->name = $request->name;
+        $subscriber->first_name = $request->first_name;
+        $subscriber->last_name = $request->last_name;
         $subscriber->save();
 
         return response()->json([
